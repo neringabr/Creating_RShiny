@@ -1,0 +1,20 @@
+# -----------------------------------------------------------------------------
+# How to enable/ disable input checkbox
+
+library(shiny)
+runApp(shinyApp(
+  ui = fluidPage(
+    shinyjs::useShinyjs(),
+    numericInput("test", "Test", 5),
+    checkboxInput("submit", label="Choose")
+  ),
+  server = function(input, output, session) {
+    observeEvent(input$submit, {
+      if(input$submit == F){
+        shinyjs::disable("test")
+      } else {
+        shinyjs::enable("test")
+      }
+    })
+  }
+))
